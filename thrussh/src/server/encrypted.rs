@@ -160,9 +160,8 @@ impl Session {
                 )
                 .await?
                 {
-                    if let EncryptedState::InitCompression = enc.state {
-                        enc.client_compression.init_decompress(&mut enc.decompress);
-                    }
+                    enc.state = EncryptedState::InitCompression;
+                    enc.client_compression.init_decompress(&mut enc.decompress);
                 }
                 Ok(self)
             }
